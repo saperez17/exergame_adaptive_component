@@ -599,7 +599,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8a97ef6cb6c8bd42a0ae89bac5777ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playGameLevel: 
+  playGameLevel: endless_runner
 --- !u!4 &418978783
 Transform:
   m_ObjectHideFlags: 0

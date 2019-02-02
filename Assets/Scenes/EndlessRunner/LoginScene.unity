@@ -2166,6 +2166,7 @@ MonoBehaviour:
   idLoginTxt: {fileID: 1126484725}
   ageTxt: {fileID: 1042729509}
   weightTxt: {fileID: 750892401}
+  searchUser: []
   sceneName: MainMenu
 --- !u!4 &1978068805
 Transform:

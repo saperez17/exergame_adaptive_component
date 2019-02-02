@@ -95,7 +95,7 @@ public class DbManager : MonoBehaviour {
 	}
 	*/
 
-
+	/*
 	public bool SearchUser(int id){
 		//It verifies if the user's ID exists in the database system
 		string[] query = new string[2];
@@ -134,6 +134,44 @@ public class DbManager : MonoBehaviour {
 			}
 		}
 	}
+	*/
+
+
+	public string[] SearchUser(int id){
+		//It verifies if the user's ID exists in the database system
+		string[] query = new string[2];
+		string strConsult = "SELECT ID FROM user_index WHERE ID = " + id.ToString ();
+		try{
+			conn =  new MySqlConnection (connectionInfo);
+			conn.Open();
+
+			cmd = new MySqlCommand(strConsult, conn);
+			rdr = cmd.ExecuteReader();
+
+			if(rdr.Read()){
+				query[0] = rdr.GetString(0);
+				//query[1] = rdr.GetString(4);
+			}
+
+			Debug.Log("user validation search result: " +  query[0]);
+			return query;
+
+		}catch(MySqlException error){
+			Debug.Log ("Error executing SearchUser() method" + error.ToString ());
+			return query;
+			//return new List<double> ();
+
+		}finally{
+			if (rdr != null) {
+				rdr.Close ();
+			}
+			if (conn != null) {
+				conn.Close ();
+			}
+		}
+	}
+
+
 
 
 	public bool UpdateTable(string tableName, string columnName, int val, string userId){

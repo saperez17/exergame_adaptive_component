@@ -19,7 +19,8 @@ public class LoginPageManager : MonoBehaviour {
 
 	//Variables used when validating user
 	//private string[] searchUser;
-	public bool searchUser;
+	//public bool searchUser;
+	public string[] searchUser;
 
 
 	//Database references
@@ -31,7 +32,8 @@ public class LoginPageManager : MonoBehaviour {
 	void Start () {
 		dbManager = FindObjectOfType<DbManager> ();
 		//searchUser = new string[2];
-		searchUser = false;
+		//searchUser = false;
+		searchUser = new string[2];
 		
 	}
 
@@ -47,7 +49,7 @@ public class LoginPageManager : MonoBehaviour {
 					if (int.TryParse (weightTxt.text, out i)) {
 						//Validate user
 						searchUser = dbManager.SearchUser(int.Parse(idNewUTxt.text));
-						if (searchUser) {
+						if (!string.IsNullOrEmpty(searchUser[0])) {
 							Debug.Log ("User found");
 
 						}
@@ -67,7 +69,7 @@ public class LoginPageManager : MonoBehaviour {
 			
 	}
 
-
+	/*
 	public void ButtonLoginClick(){
 		//SceneManager.LoadScene (sceneName);
 		if ((idLoginTxt.text != "")) {
@@ -90,6 +92,35 @@ public class LoginPageManager : MonoBehaviour {
 		}
 
 	}
+	*/
+
+
+
+	public void ButtonLoginClick(){
+		//SceneManager.LoadScene (sceneName);
+		if ((idLoginTxt.text != "")) {
+			//Validate input field data.
+			int i;
+			if (int.TryParse (idLoginTxt.text, out i)) {
+				searchUser = dbManager.SearchUser (int.Parse (idLoginTxt.text));
+				if (!string.IsNullOrEmpty(searchUser[0])) {
+					PlayerPrefs.SetString ("userID", idLoginTxt.text);
+					PlayerPrefs.SetString("hr_database", searchUser[1]);
+					SceneManager.LoadScene ("MainMenu");
+				}
+
+				else
+					Debug.Log ("User not found");
+			}else
+				Debug.Log("Id Text is incorrect");
+		} else {
+			Debug.Log ("One or more input fields missing");
+		}
+
+	}
+
+
+
 
 
 
